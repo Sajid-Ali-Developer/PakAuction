@@ -1,8 +1,8 @@
 import 'package:auctionapp/loginscreen.dart';
+import 'package:auctionapp/main.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/painting/border_radius.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        backgroundColor: Colors.grey[800],
         title: Text('Sign Up'),
         centerTitle: true,
         leading: IconButton(
@@ -53,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             key: fromkey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 0,horizontal: 5),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                 child: new Column(
                   children: <Widget>[
                     Container(
@@ -81,12 +82,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           contentPadding:
                               const EdgeInsets.symmetric(vertical: 10.0),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                           prefixIcon: const Icon(
                             Icons.person,
@@ -121,12 +126,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: Colors.white,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                         ),
                       ),
@@ -157,12 +166,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           contentPadding:
                               const EdgeInsets.symmetric(vertical: 10.0),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                         ),
                       ),
@@ -204,12 +217,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: toggle,
                           ),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white, width: 1),
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1),
                           ),
                         ),
                         obscureText: _secureText,
@@ -217,16 +234,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     SizedBox(
                       height: 20,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 150),
-                      child: RichText(
-                        text: TextSpan(
-                            text: 'Forget Password ?',
-                            //style: linkStyle,
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                            }),
-                      ),
                     ),
                     Padding(padding: EdgeInsets.only(top: 30.0)),
                     RaisedButton(
@@ -250,20 +257,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     new Center(
                       child: new RichText(
                         text: new TextSpan(
                           children: [
                             new TextSpan(
                               text: 'Already have Account ?',
-                              style: new TextStyle(color: Colors.white, fontSize: 15),
+                              style: new TextStyle(
+                                  color: Colors.white, fontSize: 15),
                             ),
                             new TextSpan(
                               text: ' SingIn Now',
-                              style: new TextStyle(color: Colors.blue,fontSize: 15),
+                              style: new TextStyle(
+                                  color: Colors.blue, fontSize: 15),
                               recognizer: new TapGestureRecognizer()
                                 ..onTap = () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => LogInPage()));
                                 },
                             ),
                           ],

@@ -33,7 +33,9 @@ class _DataActivityState extends State<DataActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data'),
+        backgroundColor: Colors.grey[800],
+        title: Text('Product Data'),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -42,7 +44,7 @@ class _DataActivityState extends State<DataActivity> {
             imageFile == null
                 ? Container(
                     margin: EdgeInsets.all(20),
-                    height: 200,
+                    height: MediaQuery.of(context).size.height / 2,
                     width: MediaQuery.of(context).size.width,
                     color: Color(0xFFe0f2f1),
                     child: IconButton(
@@ -99,7 +101,20 @@ class _DataActivityState extends State<DataActivity> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              color: Colors.grey[800],
+              child: Text(
+                'Submit',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+              ),
+              textColor: Colors.white,
+              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 80),
               onPressed: () {
                 showDialog(
                     context: context,
@@ -116,23 +131,17 @@ class _DataActivityState extends State<DataActivity> {
                         actions: [
                           FlatButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ReceiveData(
-                                          myNameController.text,
-                                          myPriceController.text,imageFileReturn)),
-                                );
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(builder: (_) {
+                                  return ReceiveData(myNameController.text,
+                                      myPriceController.text, imageFileReturn);
+                                }));
                               },
                               child: Text('Ok'))
                         ],
                       );
                     });
               },
-              child: Text(
-                'Submit',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
             ),
           ],
         ),
@@ -148,7 +157,9 @@ class _DataActivityState extends State<DataActivity> {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.data != null) {
           return Image.file(snapshot.data,
-              height: 300, width: 300, fit: BoxFit.fill);
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fill);
         } else if (snapshot.error != null) {
           return const Text(
             'Error Picking Image',

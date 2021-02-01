@@ -1,5 +1,7 @@
+import 'package:auctionapp/forgetpassword.dart';
 import 'package:auctionapp/loginscreen.dart';
 import 'package:auctionapp/dashboard.dart';
+import 'package:auctionapp/signupscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +29,13 @@ class _LogInPageState extends State<LogInPage> {
   //     return ("Invalid");
   //   }
   //}
-  String validatePass(value){
-    if(value.isEmpty){
+  String validatePass(value) {
+    if (value.isEmpty) {
       return 'enter your email';
     }
-    if(!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
+    if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
       return 'Invailid email';
-    }
-    else
+    } else
       return null;
   }
 
@@ -43,6 +44,7 @@ class _LogInPageState extends State<LogInPage> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        backgroundColor: Colors.grey[800],
         leading: IconButton(
           icon: Icon(Icons.arrow_back_rounded),
           onPressed: () {
@@ -52,71 +54,70 @@ class _LogInPageState extends State<LogInPage> {
             );
           },
         ),
-        title: Text('OnlineAuction'),
+        title: Text('Login'),
         centerTitle: true,
       ),
       body: Container(
-        // width: MediaQuery.of(context).size.width,
-        // height: MediaQuery.of(context).size.height,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage("Assets/SignIn.jpg"),
-        //     fit: BoxFit.fitHeight,
-        //   ),
-        // ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
             key: formkey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 0,horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                 child: Column(
                   children: [
                     Container(
                       padding: EdgeInsets.only(top: 50),
                       child: Image(
                         image: AssetImage('Assets/logo1.png'),
-                        width: 150,
-                        height: 150,
+                        width: 120,
+                        height: 120,
                       ),
                     ),
-                    SizedBox(height: 40),
+                    // const Divider(
+                    //   thickness: 2,
+                    //   height: 20,
+                    //   color: Colors.white,
+                    // ),
+                    SizedBox(height: 60),
                     TextFormField(
                       validator: validatePass,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'E-mail or Phone no',
                         labelText: 'E-mail',
-                        contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 0),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 0),
                         hintStyle: TextStyle(color: Colors.white),
                         labelStyle: TextStyle(color: Colors.white),
-                        enabledBorder : OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(color: Colors.white, width: 1),
                         ),
-                             border : OutlineInputBorder(
-                               borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
                           borderSide: BorderSide(color: Colors.white, width: 1),
                         ),
-
-                        prefixIcon: Icon(Icons.email_outlined,color: Colors.white,),
+                        prefixIcon: Icon(
+                          Icons.email_outlined,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     SizedBox(height: 10),
                     TextFormField(
                       style: TextStyle(color: Colors.white),
-                      onSaved:(String password) {
+                      onSaved: (String password) {
                         mypassword = password;
                       },
-                      validator: (String value){
-                        if(value.isEmpty){
+                      validator: (String value) {
+                        if (value.isEmpty) {
                           return 'enter password';
                         }
-                        if( value.length < 6){
+                        if (value.length < 6) {
                           return 'atleast six characters';
-                        }
-                        else
+                        } else
                           return null;
                       },
                       decoration: InputDecoration(
@@ -124,20 +125,30 @@ class _LogInPageState extends State<LogInPage> {
                         labelText: 'Password',
                         hintStyle: TextStyle(color: Colors.white),
                         labelStyle: TextStyle(color: Colors.white),
-                        contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 0),
-                        enabledBorder : OutlineInputBorder(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+                        enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(color: Colors.white, width: 1),
                         ),
-                        border : OutlineInputBorder(
+                        border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
                           borderSide: BorderSide(color: Colors.white, width: 1),
                         ),
-                        prefixIcon: Icon(Icons.lock_outline_rounded,color: Colors.white,),
+                        prefixIcon: Icon(
+                          Icons.lock_outline_rounded,
+                          color: Colors.white,
+                        ),
                         suffixIcon: IconButton(
                           icon: _secureText
-                              ? Icon(Icons.visibility_off,color: Colors.white,)
-                              : Icon(Icons.visibility,color: Colors.white,),
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  color: Colors.white,
+                                ),
                           onPressed: toggle,
                         ),
                       ),
@@ -148,45 +159,67 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 150),
-                      child: RichText(
-                        text: TextSpan(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ForgetPassword()),
+                          );
+                        },
+                        child: RichText(
+                          text: TextSpan(
                             text: 'Forget Password ?',
                             //style: linkStyle,
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                            }),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 10),
                     RaisedButton(
-
                       onPressed: () {
                         //validator: validate();
-                        if(formkey.currentState.validate()){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoard()));
+                        if (formkey.currentState.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DashBoard()));
                         }
                       },
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
                       color: Colors.white,
-                      child: Text('Sign In',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                       textColor: Colors.black,
-                      padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 120),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12.0, horizontal: 120),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     new Center(
                       child: new RichText(
                         text: new TextSpan(
                           children: [
                             new TextSpan(
                               text: "Don't have Account ?",
-                              style: new TextStyle(color: Colors.white, fontSize: 15),
+                              style: new TextStyle(
+                                  color: Colors.white, fontSize: 15),
                             ),
                             new TextSpan(
                               text: ' Registor Now',
-                              style: new TextStyle(color: Colors.blue,fontSize: 15),
+                              style: new TextStyle(
+                                  color: Colors.blue, fontSize: 15),
                               recognizer: new TapGestureRecognizer()
                                 ..onTap = () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(builder: (_) {
+                                    return SignUpScreen();
+                                  }));
                                 },
                             ),
                           ],
